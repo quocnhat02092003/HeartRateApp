@@ -5,14 +5,14 @@ A Flutter-based heart rate monitoring application with native Android integratio
 ## Features
 
 - Real-time heart-rate display
-- Connect to external BLE heart-rate monitors
+- Login with google account and auto login on app restart
 - Local storage of session data for trend analysis
 - Lightweight data visualization (charts)
 - Background/foreground handling for continuous monitoring
 - Platform-specific native integrations for Android (Kotlin/Java, optional C++)
 
 ## Supported platforms & tech stack
-
+- Mobile: Android (iOS support can be added similarly)
 - Flutter / Dart (UI)
 - Android (Kotlin / Java) for platform channels and permissions
 - Optional native C++ (NDK) modules for performance-critical processing
