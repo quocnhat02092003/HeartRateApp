@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../widgets/history_screen_gauge.dart';
+import '../widgets/ppg_line_chart.dart';
 
 class HistoryMeasureScreen extends StatefulWidget {
   final int bpm;
-  const HistoryMeasureScreen({super.key, required this.bpm});
+  final List<double>? ppgSignal;
+  const HistoryMeasureScreen({super.key, required this.bpm, this.ppgSignal});
 
   @override
   State<HistoryMeasureScreen> createState() => _HistoryMeasureScreenState();
@@ -29,6 +31,7 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
   @override
   Widget build(BuildContext context) {
     final bpm = widget.bpm;
+    final ppgSignal = widget.ppgSignal ?? [];
 
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.historyTitle)),
@@ -51,6 +54,17 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
               ),
               const SizedBox(height: 20),
               HistoryScreenGauge(bpm: bpm),
+              Text("Biểu đồ nhịp tim của bạn",
+                  style: const TextStyle(color: Colors.white70, fontSize: 16)),
+              const SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SizedBox(
+                  height: 80,
+                  child: PpgLineChart(signal: ppgSignal),
+                ),
+              ),
+              const SizedBox(height: 40),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Text(

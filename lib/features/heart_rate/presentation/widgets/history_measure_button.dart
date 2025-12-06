@@ -3,8 +3,9 @@ import 'package:flutter_heartrate/features/heart_rate/presentation/screens/histo
 
 class HistoryMeasureButton extends StatelessWidget {
   final int bpm;
+  final List<double> ppgSignal;
   final DateTime timestamp;
-  const HistoryMeasureButton({super.key, required this.bpm, required this.timestamp});
+  const HistoryMeasureButton({super.key, required this.bpm, required this.timestamp, required this.ppgSignal});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class HistoryMeasureButton extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => HistoryMeasureScreen(bpm: bpm),
+            builder: (context) => HistoryMeasureScreen(bpm: bpm, ppgSignal: ppgSignal),
           ),
         );
       },

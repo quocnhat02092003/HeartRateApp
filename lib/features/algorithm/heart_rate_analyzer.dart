@@ -159,7 +159,7 @@ class HeartRateAnalyzer {
         ((cfg.minPeakDistMs / 1000.0) * cfg.fps).round(),
       );
 
-  /// Thêm 1 mẫu cường độ trung bình kênh R (đã tính từ ROI).
+  /// them mau
   void addSample(double v) {
     _buffer.add(v);
     if (_buffer.length > _maxSamples) _buffer.removeFirst();
@@ -172,23 +172,9 @@ class HeartRateAnalyzer {
     }
   }
 
-  /// Alias để tương thích với code cũ (nếu trước đây dùng tên khác).
-  void addValue(double v) => addSample(v);
-  void add(double v) => addSample(v);
-
-  /// Xoá trạng thái/buffer (khi đổi camera, pause, v.v.).
-  void reset() {
-    _buffer.clear();
-    _lastSample = null;
-    _lastHp = null;
-    _lastLp = null;
-    _lastBpm = null;
-    _sinceLastEmit = 0;
-  }
-
   // ========== Core pipeline ==========
   double? _processWindow() {
-    if (_buffer.length < max(8, (cfg.fps * 2).round())) return null;
+    if (_buffer.length < max(8, (cfg.fps * 5).round())) return null;
 
     final raw = _buffer.toList(growable: false);
     final dt = 1.0 / cfg.fps;

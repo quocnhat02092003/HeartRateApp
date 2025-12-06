@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_heartrate/features/heart_rate/presentation/screens/ai_assistant_screen.dart';
 import 'package:flutter_heartrate/features/heart_rate/presentation/tabs/history_mesure_tab.dart';
 import 'package:flutter_heartrate/features/heart_rate/presentation/tabs/more_tab.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/constants/app_strings.dart';
-import '../../../../firebase/auth/GoogleAuthService.dart';
 import '../tabs/help_tab.dart';
 import '../tabs/measure_tab.dart';
 
@@ -39,7 +37,7 @@ class _HeartRateScreenState extends State<HeartRateScreen>
               ? AppStrings.history :
               currentPageIndex ==3
               ? AppStrings.setting : "",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: Colors.redAccent,
       ),
@@ -87,7 +85,7 @@ class _HeartRateScreenState extends State<HeartRateScreen>
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => AiAssistantScreen(bpm: 0)),
+                  MaterialPageRoute(builder: (_) => AiAssistantScreen()),
                 );
               },
               enableFeedback: true,

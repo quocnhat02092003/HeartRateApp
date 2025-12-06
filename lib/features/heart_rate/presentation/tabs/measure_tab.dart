@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_heartrate/database/db/heart_rate_record.dart';
 
 import 'package:flutter_heartrate/features/heart_rate/service/push_hr_blynk.dart';
+import 'package:flutter_heartrate/features/heart_rate/service/push_hr_zalo_bot.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/constants/app_strings.dart';
@@ -24,10 +25,10 @@ class MeasureTab extends StatefulWidget {
 class MeasureTabState extends State<MeasureTab> {
   CameraController? _controller;
   List<CameraDescription>? _cameras;
-  // bool _isCameraReady = false;
-  // bool _isFlashOn = false;
   int _currentBpm = 0;
   int? _startTimestamp;
+  bool _isFinishing = false;
+
 
   GoogleSignInAccount? get _user => GoogleAuthService.currentUser;
 
@@ -55,6 +56,7 @@ class MeasureTabState extends State<MeasureTab> {
         _currentBpm = bpm.toInt();
       }),
     );
+    
   }
 
   Future<void> _initializeCamera() async {
@@ -93,7 +95,8 @@ class MeasureTabState extends State<MeasureTab> {
         });
 
         // nếu đã qua 15s -> dừng đo và chuyển trang
-        if (_startTimestamp != null && timestamp - _startTimestamp! >= 15000) {
+        if (_startTimestamp != null && timestamp - _startTimestamp! >= 15000 && !_isFinishing) {
+          _isFinishing = true;
           await _finishMeasurement();
         }
       });
@@ -105,18 +108,19 @@ class MeasureTabState extends State<MeasureTab> {
   Future<void> _finishMeasurement() async {
     if (!mounted) return;
 
-    PushHrBlynk.pushData(_currentBpm);
+   PushHrBlynk.pushData(_currentBpm);
+   PushHrZaloBot.pushDataZalo(_currentBpm);
     await stopCamera();
 
     if (_user != null){
-      await addHeartRateRecordToCloud(_user!.id, _currentBpm.toInt());
+      await addHeartRateRecordToCloud(_user!.id, _currentBpm.toInt(), List<double>.from(_ppgSignal) );
     }
 
     if (mounted) {
       await Navigator.of(context)
           .push(
             MaterialPageRoute(
-              builder: (_) => HistoryMeasureScreen(bpm: _currentBpm),
+              builder: (_) => HistoryMeasureScreen(bpm: _currentBpm, ppgSignal: List<double>.from(_ppgSignal),),
             ),
           )
           .then((_) async {
@@ -124,6 +128,8 @@ class MeasureTabState extends State<MeasureTab> {
               _currentBpm = 0;
               _startTimestamp = null;
               _isButtonStartMeasureEnabled = false;
+              _isFinishing = false;
+              _ppgSignal.clear();
             });
           });
     }
@@ -135,8 +141,6 @@ class MeasureTabState extends State<MeasureTab> {
       await _controller!.setFlashMode(FlashMode.off);
       await _controller!.dispose();
       _controller = null;
-      // _isCameraReady = false;
-      // _isFlashOn = false;
       setState(() {});
     }
   }
@@ -155,10 +159,12 @@ class MeasureTabState extends State<MeasureTab> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           const SizedBox(height: 20),
-          Text(
-            _isButtonStartMeasureEnabled ? "ĐANG ĐO..." : "ĐẶT NGÓN TAY",
-            style: const TextStyle(color: Colors.white, fontSize: 22),
-          ),
+          Center(child:
+            Text(
+              _isButtonStartMeasureEnabled ? "ĐANG ĐO..." : "ĐỀ TÀI KHÓA LUẬN TỐT NGHIỆP IUH (Nhật-Tâm)",textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white, fontSize: 22),
+            )
+            ),
           const SizedBox(height: 30),
           BpmGauge(
             progress: _currentBpm / 180,

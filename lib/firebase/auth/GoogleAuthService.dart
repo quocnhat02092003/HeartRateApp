@@ -18,7 +18,7 @@ class GoogleAuthService {
     }
   }
 
-  /// Đăng nhập tự động (nếu token còn hợp lệ)
+  /// Auto login (nếu token còn hợp lệ)
   static Future<GoogleSignInAccount?> signInSilently() async {
     try {
       final GoogleSignInAccount? user = await _googleSignIn.signInSilently();

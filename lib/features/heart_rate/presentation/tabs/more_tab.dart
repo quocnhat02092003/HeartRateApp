@@ -94,9 +94,9 @@ class _MoreTabState extends State<MoreTab> {
             ),
             CardSetting(
               icon: Icons.history_outlined,
-              onTap: () {
-                Navigator.of(context).pushNamed('/history_measure_tab');
-              },
+              // onTap: () {
+              //   Navigator.of(context).pushNamed('/history_measure_tab');
+              // },
               title: 'Lịch sử đo',
               time: 'Lịch sử đã từng đo đạc thông số nhịp tim',
             ),

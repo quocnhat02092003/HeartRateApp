@@ -30,6 +30,7 @@ class _HistoryScreenGaugeState extends State<HistoryScreenGauge> {
     final color = _getColorForBpm(widget.bpm);
 
     return Container(
+      height: 300,
       margin: const EdgeInsets.all(10),
       child: SfRadialGauge(
         enableLoadingAnimation: true,

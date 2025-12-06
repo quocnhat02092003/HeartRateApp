@@ -147,12 +147,16 @@ class _HistoryMeasureTabState extends State<HistoryMeasureTab> {
                   final rec = records[index];
                   final bpm = rec['bpm'];
                   final timestamp = rec['timestamp'];
+                  final List<double> ppgSignal =
+                  (rec['ppgSignal'] as List<dynamic>)
+                      .map((e) => (e as num).toDouble())
+                      .toList();
                   final time = timestamp is Timestamp
                       ? timestamp.toDate()
                       : DateTime.tryParse(timestamp.toString()) ??
                             DateTime.now();
 
-                  return HistoryMeasureButton(bpm: bpm, timestamp: time);
+                  return HistoryMeasureButton(bpm: bpm, timestamp: time, ppgSignal: ppgSignal,);
                 },
               );
             },
