@@ -1,5 +1,6 @@
 class AppStrings {
   static const appTitle = 'HEART RATE';
+  static const bloodPressureTitle = 'BLOOD PRESSURE';
   static const historyTitle = 'Kết quả đo nhịp tim của bạn';
   static const help = 'TUTORIAL';
   static const measure = 'ĐO';

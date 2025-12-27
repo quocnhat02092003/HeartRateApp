@@ -1,7 +1,8 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class PushHrBlynk {
-  static const String authToken = "VvjWDIIH5vS1Obg9JScMmUqVn9hMIjCt";
+  static final String authToken = dotenv.env['AUTH_TOKEN_BLYNK'] ?? "";
 
   static Future<void> pushData(int value) async {
     print(value);

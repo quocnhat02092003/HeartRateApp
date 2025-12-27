@@ -1,12 +1,11 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class PushHrZaloBot {
-  static const String botToken = "3179939951305615471:OUEdhyGNcRiUhTIKlsxnRNBkpEhMigruCqEUeoQCAbZZAviEwcfHqmAKiJuwhUrU";
+  static final String botToken = dotenv.env['BOT_TOKEN_ZALO'] ?? '';
 
   static Future<void> pushDataZalo(int value) async {
-    print(value);
     String description = "Heart Rate: $value BPM";
-    String code = "bpm";
 
     //send event to blynk
     final urlSendEvent = Uri.parse(

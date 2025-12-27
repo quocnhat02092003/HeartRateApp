@@ -31,7 +31,7 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
   @override
   Widget build(BuildContext context) {
     final bpm = widget.bpm;
-    final ppgSignal = widget.ppgSignal ?? [];
+    final ppgSignal = widget.ppgSignal?.take(60) ?? [];
 
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.historyTitle)),
@@ -61,7 +61,7 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: SizedBox(
                   height: 80,
-                  child: PpgLineChart(signal: ppgSignal),
+                  child: PpgLineChart(signal: ppgSignal.toList()),
                 ),
               ),
               const SizedBox(height: 40),

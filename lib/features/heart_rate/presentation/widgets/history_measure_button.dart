@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heartrate/features/heart_rate/presentation/screens/history_measure_screen.dart';
+import 'package:intl/intl.dart';
 
 class HistoryMeasureButton extends StatelessWidget {
   final int bpm;
@@ -30,7 +31,7 @@ class HistoryMeasureButton extends StatelessWidget {
                   Icon(Icons.history, color: Colors.white70),
                   const SizedBox(width: 8),
                   Text(
-                    timestamp.toString(),
+                    DateFormat("dd/MM/yyyy HH:mm:ss").format(timestamp),
                     style: TextStyle(color: Colors.white70),
                   ),
                 ],

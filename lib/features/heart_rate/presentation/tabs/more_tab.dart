@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_heartrate/features/heart_rate/presentation/screens/ai_assistant_screen.dart';
+import 'package:flutter_heartrate/features/heart_rate/presentation/screens/blood_pressure_screen.dart';
+import 'package:flutter_heartrate/features/heart_rate/presentation/tabs/history_mesure_tab.dart';
 import 'package:flutter_heartrate/features/heart_rate/presentation/widgets/card_setting.dart';
 import 'package:flutter_heartrate/features/heart_rate/presentation/widgets/card_user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../firebase/auth/GoogleAuthService.dart';
 
 class MoreTab extends StatefulWidget {
-  const MoreTab({super.key});
-
+  final VoidCallback goToHistoryMeasureTab;
+  const MoreTab({super.key, required this.goToHistoryMeasureTab});
   @override
   State<MoreTab> createState() => _MoreTabState();
 }
@@ -57,9 +60,7 @@ class _MoreTabState extends State<MoreTab> {
                 ? CardUser(
                     name: _user!.displayName ?? '',
                     email: _user!.email,
-                    avatarUrl:
-                        _user!.photoUrl ??
-                        '',
+                    avatarUrl: _user!.photoUrl ?? '',
                   )
                 : CardUser(name: '', email: '', avatarUrl: ''),
             const SizedBox(height: 20),
@@ -91,12 +92,30 @@ class _MoreTabState extends State<MoreTab> {
               icon: Icons.auto_awesome,
               title: 'Trợ lý AI',
               time: 'Chuyên gia AI giúp phân tích vấn đề qua nhịp tim',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AiAssistantScreen()),
+                );
+              },
+            ),
+            CardSetting(
+              icon: Icons.info,
+              title: 'Thay đổi thông tin sức khỏe',
+              time: 'Thay đổi thông tin sức khỏe cá nhân trước đó',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        const BloodPressureScreen(mode: BloodPressureMode.edit),
+                  ),
+                );
+              },
             ),
             CardSetting(
               icon: Icons.history_outlined,
-              // onTap: () {
-              //   Navigator.of(context).pushNamed('/history_measure_tab');
-              // },
+              onTap: widget.goToHistoryMeasureTab,
               title: 'Lịch sử đo',
               time: 'Lịch sử đã từng đo đạc thông số nhịp tim',
             ),

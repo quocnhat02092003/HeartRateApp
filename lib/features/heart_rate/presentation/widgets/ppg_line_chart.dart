@@ -12,7 +12,7 @@ class PpgLineChart extends StatelessWidget {
     final spots = signal
         .asMap()
         .entries
-        .map((e) => FlSpot(e.key.toDouble(), e.value))
+        .map((e) => FlSpot(e.key.toDouble(), ((e.value)* 10).truncate() % 10))
         .toList();
 
     return LineChart(

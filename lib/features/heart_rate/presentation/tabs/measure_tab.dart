@@ -74,8 +74,6 @@ class MeasureTabState extends State<MeasureTab> {
 
       await _controller!.initialize();
       await _controller!.setFlashMode(FlashMode.torch);
-      // _isFlashOn = true;
-      // setState(() => _isCameraReady = true);
 
       _startTimestamp = DateTime.now().millisecondsSinceEpoch;
 

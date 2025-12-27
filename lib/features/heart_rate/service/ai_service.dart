@@ -1,8 +1,9 @@
 // dart
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-const String GEMINI_API_KEY = "AIzaSyC2iO_w1tlkltS1edVjgdlqynb6TPUnvtg";
+final String GEMINI_API_KEY = dotenv.env['GEMINI_API_KEY'] ?? '';
 
 Future<Map<String, String>> getContentFromGemini(String value) async {
   final String url =

@@ -128,7 +128,7 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
 
 Widget _buildUserMessage(String message) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 5.0),
+    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -155,7 +155,7 @@ Widget _buildUserMessage(String message) {
 
 Widget _buildAIMessage(String message) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 5.0),
+    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
