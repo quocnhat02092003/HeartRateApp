@@ -6,7 +6,17 @@ import '../widgets/ppg_line_chart.dart';
 class HistoryMeasureScreen extends StatefulWidget {
   final int bpm;
   final List<double>? ppgSignal;
-  const HistoryMeasureScreen({super.key, required this.bpm, this.ppgSignal});
+  final double? bp_sys;
+  final double? bp_dia;
+  final DateTime timestamp;
+  const HistoryMeasureScreen({
+    super.key,
+    required this.bpm,
+    this.ppgSignal,
+    required this.bp_sys,
+    required this.bp_dia,
+    required this.timestamp,
+  });
 
   @override
   State<HistoryMeasureScreen> createState() => _HistoryMeasureScreenState();
@@ -31,6 +41,8 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
   @override
   Widget build(BuildContext context) {
     final bpm = widget.bpm;
+    final bp_sys = widget.bp_sys ?? 0;
+    final bp_dia = widget.bp_dia ?? 0;
     final ppgSignal = widget.ppgSignal?.take(60) ?? [];
 
     return Scaffold(
@@ -48,14 +60,20 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                '13 Tháng 9, 2025 - 10:29',
-                style: TextStyle(color: Colors.white70, fontSize: 14),
+              Text(
+                "Huyết áp tâm trương : $bp_sys",
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
+              ),
+              Text(
+                "Huyết áp tâm thu : $bp_dia",
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
               const SizedBox(height: 20),
               HistoryScreenGauge(bpm: bpm),
-              Text("Biểu đồ nhịp tim của bạn",
-                  style: const TextStyle(color: Colors.white70, fontSize: 16)),
+              Text(
+                "Biểu đồ nhịp tim của bạn",
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
+              ),
               const SizedBox(height: 20),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),

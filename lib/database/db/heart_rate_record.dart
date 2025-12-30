@@ -3,12 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 FirebaseFirestore db = FirebaseFirestore.instance;
 
 //Upload heart rate record to Firestore
-Future<void> addHeartRateRecordToCloud(String userId, int bpm, List<double> ppgSignal) async {
+Future<void> addHeartRateRecordToCloud(String userId, int bpm, List<double> ppgSignal, double bp_sys, double bp_dia) async {
   await db.collection('heart-rate-record').add({
     'userId': userId,
     'bpm': bpm,
     'ppgSignal': ppgSignal,
     'timestamp': FieldValue.serverTimestamp(),
+    'bp_sys': bp_sys,
+    'bp_dia': bp_dia,
   }).then((s) => print("Document added with ID ${s.id}"));
 }
 

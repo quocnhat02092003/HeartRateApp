@@ -219,12 +219,16 @@ class _HistoryMeasureTabState extends State<HistoryMeasureTab> {
             final timestamp = rec['timestamp'];
             final time = timestamp is Timestamp ? timestamp.toDate() : DateTime.now();
             final ppgRaw = rec['ppgSignal'] as List<dynamic>? ?? [];
+            final bp_dia = rec['bp_dia'] is num ? (rec['bp_dia'] as num).toDouble() : 0.0;
+            final bp_sys = rec['bp_sys'] is num ? (rec['bp_sys'] as num).toDouble() : 0.0;
             final ppg = ppgRaw.whereType<num>().map((e) => e.toDouble()).toList();
 
             return HistoryMeasureButton(
               bpm: bpm,
               timestamp: time,
               ppgSignal: ppg,
+              bp_dia: bp_dia,
+              bp_sys: bp_sys,
             );
           },
         );

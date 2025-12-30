@@ -79,8 +79,8 @@ flutter:
     - assets/image/heart_rate.png
     - assets/fonts/times.ttf
     - assets/fonts/timesbd.ttf
-    - assets/models/bp_model.tflite
-    - assets/models/bp_scaler.json
+    - assets/models/model.tflite
+    - assets/models/config.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

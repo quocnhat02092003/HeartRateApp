@@ -24,7 +24,7 @@ class BPScaler {
 
   Future<void> load() async {
     final jsonStr =
-    await rootBundle.loadString('assets/models/bp_scaler.json');
+    await rootBundle.loadString('assets/models/config.json');
     final data = json.decode(jsonStr);
 
     xMean = List<double>.from(data['X_mean']);
@@ -56,7 +56,7 @@ class BPModel {
   //load tflite model
   Future<void> load() async {
     interpreter = await Interpreter.fromAsset(
-      'assets/models/bp_model.tflite',
+      'assets/models/model.tflite',
     );
   }
 

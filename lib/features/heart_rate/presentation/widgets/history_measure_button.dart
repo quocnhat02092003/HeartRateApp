@@ -5,8 +5,17 @@ import 'package:intl/intl.dart';
 class HistoryMeasureButton extends StatelessWidget {
   final int bpm;
   final List<double> ppgSignal;
+  final double bp_dia;
+  final double bp_sys;
   final DateTime timestamp;
-  const HistoryMeasureButton({super.key, required this.bpm, required this.timestamp, required this.ppgSignal});
+  const HistoryMeasureButton({
+    super.key,
+    required this.bpm,
+    required this.timestamp,
+    required this.ppgSignal,
+    required this.bp_dia,
+    required this.bp_sys,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +23,13 @@ class HistoryMeasureButton extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => HistoryMeasureScreen(bpm: bpm, ppgSignal: ppgSignal),
+            builder: (context) => HistoryMeasureScreen(
+              bpm: bpm,
+              ppgSignal: ppgSignal,
+              timestamp: timestamp,
+              bp_dia: bp_dia,
+              bp_sys: bp_sys,
+            ),
           ),
         );
       },
