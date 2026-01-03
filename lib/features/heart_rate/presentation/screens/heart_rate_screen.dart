@@ -16,7 +16,7 @@ class HeartRateScreen extends StatefulWidget {
 
 class _HeartRateScreenState extends State<HeartRateScreen>
     with SingleTickerProviderStateMixin {
-  int currentPageIndex = 2;
+  int currentPageIndex = 1;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.onlyShowSelected;
 
@@ -33,10 +33,8 @@ class _HeartRateScreenState extends State<HeartRateScreen>
           currentPageIndex == 0
               ? AppStrings.help
               : currentPageIndex == 1
-              ? AppStrings.bloodPressureTitle
-              : currentPageIndex == 2
               ? AppStrings.appTitle
-              : currentPageIndex == 3
+              : currentPageIndex == 2
               ? AppStrings.history
               : AppStrings.setting,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -61,11 +59,6 @@ class _HeartRateScreenState extends State<HeartRateScreen>
             label: 'Trợ giúp',
           ),
           NavigationDestination(
-            icon: Icon(Icons.noise_aware_outlined),
-            selectedIcon: Icon(Icons.noise_aware),
-            label: 'Huyết áp',
-          ),
-          NavigationDestination(
             icon: Icon(Icons.home_outlined),
             label: 'Trang chủ',
             selectedIcon: Icon(Icons.home),
@@ -84,18 +77,17 @@ class _HeartRateScreenState extends State<HeartRateScreen>
       ),
       body: <Widget>[
         HelpTab(),
-        BloodPressureTab(),
         MeasureTab(),
         HistoryMeasureTab(),
         MoreTab(
           goToHistoryMeasureTab: () {
             setState(() {
-              currentPageIndex = 3;
+              currentPageIndex = 2;
             });
           },
         ),
       ][currentPageIndex],
-      floatingActionButton: currentPageIndex == 2
+      floatingActionButton: currentPageIndex == 1
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.of(

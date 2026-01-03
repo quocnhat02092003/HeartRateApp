@@ -85,13 +85,15 @@ class _HistoryMeasureTabState extends State<HistoryMeasureTab> {
         final row = grid.rows.add();
 
         final timestamp = rec['timestamp'];
+        final sys = rec['bp_sys'];
+        final dia = rec['bp_dia'];
         final date = timestamp is Timestamp
             ? timestamp.toDate()
             : DateTime.now();
 
         row.cells[0].value = DateFormat("dd/MM/yyyy HH:mm").format(date);
         row.cells[1].value = rec['bpm'].toString();
-        row.cells[2].value = "Đo nhịp tim cá nhân";
+        row.cells[2].value = "Huyết áp $sys/$dia mmHg";
       }
 
       // Draw grid safely
