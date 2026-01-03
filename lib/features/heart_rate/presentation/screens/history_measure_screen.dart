@@ -48,27 +48,22 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.historyTitle)),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
             children: [
-              const SizedBox(height: 20),
               Center(
                 child: Text(
                   '$bpm BPM',
                   style: const TextStyle(color: Colors.white70, fontSize: 32),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Text(
-                "Huyết áp tâm trương : $bp_sys",
-                style: const TextStyle(color: Colors.white70, fontSize: 16),
+                "Blood Pressure : $bp_sys/$bp_dia mmHg",
+                style: const TextStyle(color: Colors.white70, fontSize: 20),
               ),
-              Text(
-                "Huyết áp tâm thu : $bp_dia",
-                style: const TextStyle(color: Colors.white70, fontSize: 16),
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               HistoryScreenGauge(bpm: bpm),
               Text(
                 "Biểu đồ nhịp tim của bạn",
@@ -82,7 +77,7 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
                   child: PpgLineChart(signal: ppgSignal.toList()),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
@@ -98,15 +93,9 @@ class _HistoryMeasureScreenState extends State<HistoryMeasureScreen>
                   textAlign: TextAlign.center,
                 ),
               ),
+              SizedBox(height: 10),
+              Center(child: Text("Kết quả đo chỉ mang tính tham khảo", style: TextStyle(fontSize: 12)),),
             ],
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              'Kết quả đo chỉ mang tính chất tham khảo. Nếu bạn cảm thấy không ổn, vui lòng liên hệ bác sĩ.',
-              style: TextStyle(color: Colors.white70, fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
           ),
         ],
       ),
